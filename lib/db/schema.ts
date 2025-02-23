@@ -4,7 +4,7 @@ import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 export const bookmarks = pgTable("bookmarks", {
   id: uuid().defaultRandom(),
 
-  userId: uuid("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id, {
       onDelete: "cascade",
@@ -40,7 +40,7 @@ export const bookmarks = pgTable("bookmarks", {
 export const categories = pgTable("categories", {
   id: uuid().defaultRandom().primaryKey(),
 
-  userId: uuid("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id, {
       onDelete: "cascade",
@@ -62,7 +62,7 @@ export const categories = pgTable("categories", {
 // Better-Auth tables
 
 export const users = pgTable("users", {
-  id: uuid().defaultRandom().primaryKey(),
+  id: text("id").primaryKey(),
 
   name: text("name").notNull(),
 
@@ -82,9 +82,9 @@ export const users = pgTable("users", {
 });
 
 export const sessions = pgTable("sessions", {
-  id: uuid().defaultRandom(),
+  id: text("id").primaryKey(),
 
-  userId: uuid("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 
@@ -106,9 +106,9 @@ export const sessions = pgTable("sessions", {
 });
 
 export const accounts = pgTable("accounts", {
-  id: uuid().defaultRandom(),
+  id: text("id").primaryKey(),
 
-  userId: uuid("user_id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 
@@ -140,7 +140,7 @@ export const accounts = pgTable("accounts", {
 });
 
 export const verifications = pgTable("verifications", {
-  id: uuid().defaultRandom(),
+  id: text("id").primaryKey(),
 
   identifier: text("identifier").notNull(),
 
